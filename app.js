@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
-const { initializeWebsocketServer } = require("./server/backend");
+const { initializeWebsocketServer } = require("./server/websocketserver");
 
 // Create the express server
 const app = express();
@@ -40,4 +40,3 @@ app.get("/", (req, res) => {
     );
   });
 })();
-//
