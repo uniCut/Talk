@@ -12,4 +12,4 @@ RUN npm install
 
 
 # Start the server when the container starts
-CMD ["npm start", "run", "prod"]
+CMD ["npm", "run", "prod"]
