@@ -6,3 +6,13 @@ services:
     restart: always
     ports:
       - 6379:6379
+
+  chat:
+    image: simi97/chatapp
+    restart: always
+    ports:
+      - 9700:3000
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
