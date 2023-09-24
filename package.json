@@ -1,5 +1,5 @@
 {
-  "name": "js-project-starter",
+  "name": "unicut/talk",
   "version": "1.0.0",
   "main": "app.js",
   "license": "MIT",
@@ -15,8 +15,5 @@
     "nodemon": "^2.0.21",
     "redis": "^4.6.6",
     "ws": "^8.13.0"
-  },
-  "npm": {
-    "packageManager": "npm"
   }
 }
