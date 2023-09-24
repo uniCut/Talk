@@ -13,5 +13,7 @@ RUN npm install
 # copy the source Code to the container
 COPY . /app/
 
+EXPOSE 3000
+
 # Start the server when the container starts
 CMD ["node", "app.js"]
