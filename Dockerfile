@@ -11,7 +11,7 @@ COPY package.json /app/package.json
 RUN npm install
 
 # copy the source Code to the container
-COPY . /app/
+COPY . .
 
 EXPOSE 3000
 
