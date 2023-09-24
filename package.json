@@ -15,5 +15,8 @@
     "nodemon": "^2.0.21",
     "redis": "^4.6.6",
     "ws": "^8.13.0"
+  },
+  "npm": {
+    "packageManager": "npm"
   }
 }
