@@ -1,19 +1,20 @@
-# Use the official Node.js image as the base image
+# Verwendung des offizilen Node.js Image als Basis
 FROM node:18
 
-# Set the working directory inside the container
+# Legt mein Start-Ordner fest
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files to the container
+# Kopiert die package.json-Datei in den Ordner /app/package.json
 COPY package.json /app/package.json
 
-# Install the dependencies
+# Installier den NPM-Paketmanager für dependencies
 RUN npm install
 
-# copy the source Code to the container
+# Source-Code von meinem Ordner wird in Start Ordner reinkopiert
 COPY . .
 
+# Braucht es nicht umbedingt legt aber den Port fest
 EXPOSE 3000
 
-# Start the server when the container starts
+# Startet den Server wenn der Container gestartet ist
 CMD ["node", "app.js"]
