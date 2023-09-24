@@ -7,7 +7,7 @@ const redisExpireTimeInSeconds = 10;
 
 let clients = [];
 
-// Intiiate the websocket server
+// Initialisiere den WebSocket-Server
 const initializeWebsocketServer = async (server) => {
   redisClient = redis.createClient({
     socket: {
@@ -16,10 +16,10 @@ const initializeWebsocketServer = async (server) => {
     },
   });
   await redisClient.connect();
-  // This is the subscriber part
+  // Dies ist der Teil für den Subscriber
   const subscriber = redisClient.duplicate();
   await subscriber.connect();
-  // This is the publisher part
+  // Dies ist der Teil für den Publisher
   publisher = redisClient.duplicate();
   await publisher.connect();
 
@@ -27,18 +27,18 @@ const initializeWebsocketServer = async (server) => {
   websocketServer.on("connection", onConnection);
   websocketServer.on("error", console.error);
   await subscriber.subscribe("newMessage", onRedisMessage);
-  // Start the heartbeat once the server has been initialized
+  // Starte das Heartbeat, sobald der Server initialisiert ist
   heartbeat();
 };
 
-// If a new connection is established, the onConnection function is called
+// Wenn eine neue Verbindung hergestellt wird, wird die Funktion onConnection aufgerufen
 const onConnection = (ws) => {
-  console.log("New websocket connection");
+  console.log("Neue WebSocket-Verbindung");
   ws.on("close", () => onClose(ws));
   ws.on("message", (message) => onClientMessage(ws, message));
 };
 
-// Get all users from redis
+// Hole alle Benutzer aus Redis
 const getUsersFromRedis = async () => {
   let userKeys = await redisClient.keys("user:*");
 
@@ -53,15 +53,15 @@ const getUsersFromRedis = async () => {
   return users;
 };
 
-// If a new message is received, the onClientMessage function is called
+// Wenn eine neue Nachricht empfangen wird, wird die Funktion onClientMessage aufgerufen
 const onClientMessage = async (ws, message) => {
   const messageObject = JSON.parse(message);
-  console.log("Received message from client: " + messageObject.type);
+  console.log("Nachricht von Client empfangen: " + messageObject.type);
   switch (messageObject.type) {
     case "user":
       clients = clients.filter((client) => client.ws !== ws);
       clients.push({ ws, user: messageObject.user });
-      console.log("Number of clients: " + clients.length);
+      console.log("Anzahl der Clients: " + clients.length);
       redisClient.set(
         `user:${messageObject.user.id}`,
         JSON.stringify(messageObject.user)
@@ -79,14 +79,14 @@ const onClientMessage = async (ws, message) => {
       publisher.publish("newMessage", JSON.stringify(messageObject));
       break;
     default:
-      console.error("Unknown message type: " + messageObject.type);
+      console.error("Unbekannter Nachrichtentyp: " + messageObject.type);
   }
 };
 
-// If a new message from the redis channel is received, the onRedisMessage function is called
+// Wenn eine neue Nachricht aus dem Redis-Kanal empfangen wird, wird die Funktion onRedisMessage aufgerufen
 const onRedisMessage = async (message) => {
   const messageObject = JSON.parse(message);
-  console.log("Received message from redis channel: " + messageObject.type);
+  console.log("Nachricht aus dem Redis-Kanal empfangen: " + messageObject.type);
   switch (messageObject.type) {
     case "message":
       clients.forEach((client) => {
@@ -97,13 +97,13 @@ const onRedisMessage = async (message) => {
       await pushUsers();
       break;
     default:
-      console.error("Unknown message type: " + messageObject.type);
+      console.error("Unbekannter Nachrichtentyp: " + messageObject.type);
   }
 };
 
-// If a connection is closed, the onClose function is called
+// Wenn eine Verbindung geschlossen wird, wird die Funktion onClose aufgerufen
 const onClose = async (ws) => {
-  console.log("Websocket connection closed");
+  console.log("WebSocket-Verbindung geschlossen");
   const client = clients.find((client) => client.ws === ws);
   if (!client) return;
   redisClient.del(`user:${client.user.id}`);
@@ -114,7 +114,7 @@ const onClose = async (ws) => {
   clients = clients.filter((client) => client.ws !== ws);
 };
 
-// The heartbeat function is called every 5 seconds
+// Die Heartbeat-Funktion wird alle 5 Sekunden aufgerufen
 const heartbeat = async () => {
   for (let i = 0; i < clients.length; i++) {
     redisClient.expire(`user:${clients[i].user.id}`, redisExpireTimeInSeconds);
@@ -123,7 +123,7 @@ const heartbeat = async () => {
   setTimeout(heartbeat, (redisExpireTimeInSeconds * 1000) / 2);
 };
 
-// Push the users to all connected clients
+// Sende die Benutzer an alle verbundenen Clients
 const pushUsers = async () => {
   const users = await getUsersFromRedis();
   const message = {
