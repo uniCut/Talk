@@ -4,41 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PVS Chat</title>
-    <link rel="stylesheet" href="/style.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/script.js"></script>
+    <title>🎙️ TALK Chat</title> <!-- Titel des HTML-Dokuments -->
+    <link rel="stylesheet" href="/style.css" /> <!-- Verweis auf die CSS-Datei -->
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Verweis auf eine externe JavaScript-Bibliothek -->
+    <script src="/script.js"></script> <!-- Verweis auf die lokale JavaScript-Datei -->
   </head>
   <body class="flex flex-col bg-slate-800 text-white h-screen w-screen gap-3">
+    <!-- Körper des HTML-Dokuments -->
     <div class="absolute left-0 top-0 bottom-0 pl-8 flex items-center">
       <div class="flex flex-col bg-slate-500 w-80 rounded-lg p-4 gap-4">
-        <h2 class="font-bold self-center">Active Users</h2>
-        <div class="flex flex-col gap-1" id="users"></div>
+        <h2 class="font-bold self-center">Aktive Benutzer</h2> <!-- Überschrift für aktive Benutzer -->
+        <div class="flex flex-col gap-1" id="users"></div> <!-- Bereich für die Liste der Benutzer -->
         <div class="flex">
           <input
             type="text"
             id="username"
             class="h-12 bg-slate-700 text-white grow px-4"
-            placeholder="Username..."
+            placeholder="Benutzername..."
           />
           <button
             id="login"
             class="h-12 bg-green-500 hover:bg-green-600 text-white px-4"
             onclick="changeUsername()"
           >
-            Save
+            Speichern <!-- Button zum Speichern des Benutzernamens -->
           </button>
         </div>
       </div>
     </div>
     <header class="flex justify-center items-center h-14 flex-shrink-0 pt-3">
-      <h1 class="font-bold text-2xl">💬 TALK</h1>
+      <h1 class="font-bold text-2xl">💬 TALK</h1> <!-- Überschrift für die Anwendung -->
     </header>
     <main class="grow flex justify-center overflow-y-auto">
       <div
         class="flex flex-col flex-grow flex-shrink overflow-y-auto max-w-xl md:max-w-3xl px-4 pt-4 bg-slate-600 rounded-lg gap-4 pb-8"
         id="messages"
-      ></div>
+      ></div> <!-- Bereich für Nachrichten -->
     </main>
     <div class="flex justify-center h-12 flex-shrink-0">
       <div class="flex grow max-w-3xl">
@@ -46,7 +47,7 @@
           type="text"
           id="message"
           class="h-12 bg-slate-700 text-white grow px-4"
-          placeholder="Message..."
+          placeholder="Nachricht..."
           onkeydown="if (event.key === 'Enter') sendMessage()"
         />
         <button
@@ -54,12 +55,12 @@
           class="h-12 bg-green-500 hover:bg-green-600 text-white px-4"
           onclick="sendMessage()"
         >
-          Send
+          Senden <!-- Button zum Senden der Nachricht -->
         </button>
       </div>
     </div>
     <footer class="flex justify-center h-14 items-center flex-shrink-0">
-      <p>Made with ❤️ and a lot of ☕️ by NOPE</p>
+      <p>Erstellt mit ❤️ und viel ☕️ von NOPE</p> <!-- Fußzeile mit Autorinformationen -->
     </footer>
   </body>
 </html>
