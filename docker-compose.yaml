@@ -4,14 +4,12 @@ services:
   redis:
     image: redis:alpine
     restart: always
-    ports:
-      - 6379:6379
 
   chat:
     image: unicut/talk
     restart: always
     ports:
-      - 9700:3000
+      - 3000:3000
     depends_on:
       - redis
     environment:
