@@ -1,6 +1,6 @@
 const express = require("express");
 const http = require("http");
-const Redis = require('redis');
+const redis = require('redis');
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
 const { initializeWebsocketServer } = require("./server/websocketserver");
