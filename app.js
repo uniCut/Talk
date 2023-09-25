@@ -13,7 +13,7 @@ const app = express();
 const server = http.createServer(app);
 
 // Create the redis
-const redisClient = new Redis({
+const redisClient = redis.createClient({
   host: 'redis',
   port: 6379,
 });
