@@ -1,12 +1,21 @@
 const express = require("express");
 const http = require("http");
+const Redis = require('redis');
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
 const { initializeWebsocketServer } = require("./server/websocketserver");
 
+
+
 // Create the express server
 const app = express();
 const server = http.createServer(app);
+
+// Create the redis
+const redisClient = new Redis({
+  host: 'redis',
+  port: 6379,
+});
 
 // create a livereload server
 const env = process.env.NODE_ENV || "development";
